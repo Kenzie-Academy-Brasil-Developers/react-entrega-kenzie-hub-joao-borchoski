@@ -46,8 +46,6 @@ export const StyledDiv1Dashbord = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    
-
     padding: 16px 0;
     padding-bottom: 48px;
 
@@ -62,12 +60,13 @@ export const StyledDiv1Dashbord = styled.div`
 
 export const StyledDiv2Dashbord = styled.div`
     width: 100%;
+    height: 65%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    gap: 200px;
+    gap: 32px;
 
     span {
         display: flex;
@@ -85,9 +84,5 @@ export const StyledDiv2Dashbord = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    div {
-        opacity: 0.5;
     }
 `;

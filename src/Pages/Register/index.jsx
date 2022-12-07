@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Api } from "../../Components/Services/Api";
 
-import { ToastContainer, toast, Zoom } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const Register = () => {
@@ -61,16 +61,16 @@ export const Register = () => {
                 contact: data.contact,
                 course_module: data.course_module,
             });
+            console.log(response)
 
             toast.success("Usuário criado com sucesso!");
 
             setTimeout(() => navigate("/"), 3000);
-            
 
             toast.success("Conta criada com sucesso!");
         } catch (error) {
             toast.error(`Ops, ${error.response.data.message}`);
-            console.log(error)
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -78,7 +78,6 @@ export const Register = () => {
 
     return (
         <StyledContainerRegister>
-            <ToastContainer transition={Zoom} autoClose={2000} />
             <section>
                 <img src={logo} alt="logo" />
                 <Link to={"/"}>Voltar</Link>

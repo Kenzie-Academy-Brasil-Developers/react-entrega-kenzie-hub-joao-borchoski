@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    h1, h2, h3, h4, h5, h6, span, a, li, button, input, p, select {
+    h1, h2, h3, h4, h5, h6, span, a, li, button, input, p, select, label {
         font-family: 'Montserrat', sans-serif;
     }
 
