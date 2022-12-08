@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StlyledTechDiv = styled.div`
+    
+
     background: #212529;
 
     width: 100%;
@@ -35,6 +37,7 @@ export const StlyledTechDiv = styled.div`
 
         @media (max-width: 1000px) {
             height: 300px;
+            font-size: 90%;
         }
 
         ::-webkit-scrollbar {
@@ -61,6 +64,12 @@ export const StlyledTechDiv = styled.div`
             padding: 14px;
 
             border-radius: 16px;
+
+            h3{
+                @media (max-width: 1000px) {
+                    max-width: 100px;
+                }
+            }
 
             section {
                 display: flex;

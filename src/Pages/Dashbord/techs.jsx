@@ -4,18 +4,32 @@ import { StlyledTechDiv, StyledModalDiv } from "./techs";
 
 import { CgTrashEmpty } from "react-icons/cg";
 import { AiOutlineClose } from "react-icons/ai";
+import { MdEdit } from "react-icons/md";
 
 import { useContext } from "react";
-import { AuthContext } from "../../Contexts/AuthConxtext";
+
+import { UserContext } from "../../Contexts/UserConxtext";
 
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+
 import { Api } from "../../Components/Services/Api";
+
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+
+import { toast } from "react-toastify";
+import { TechsContext } from "../../Contexts/TechsContext";
+import { UpdateTech } from "../../Components/UpdateTech";
+import { json } from "react-router-dom";
 
 export const Techs = () => {
-    const { user, observer, setObserver } = useContext(AuthContext);
+    const { user } = useContext(UserContext);
+    const {
+        observer,
+        setObserver,
+        width,
+        setUpdateModal,
+    } = useContext(TechsContext);
     const [techList, setTechList] = useState([]);
 
     const token = localStorage.getItem("@kenziehub:token");
@@ -56,8 +70,16 @@ export const Techs = () => {
                     <h3>{element.title}</h3>
                     <section>
                         <p>{element.status}</p>
+                        <button
+                            onClick={() => {
+                                setUpdateModal(true);
+                                localStorage.setItem('user', JSON.stringify(element))
+                            }}
+                        >
+                            <MdEdit size={width > 1000 ? 30 : 22} />
+                        </button>
                         <button onClick={() => deleteTech(element.id)}>
-                            <CgTrashEmpty size={30} />
+                            <CgTrashEmpty size={width > 1000 ? 30 : 22} />
                         </button>
                     </section>
                 </li>
@@ -84,10 +106,12 @@ export const Techs = () => {
 
 export function AddTech() {
     const { register, handleSubmit } = useForm();
-    const { setModal, observer, setObserver } = useContext(AuthContext);
+    const { setModal, observer, setObserver } = useContext(TechsContext);
 
     const newTech = async (data) => {
         const token = localStorage.getItem("@kenziehub:token");
+
+        console.log(data)
 
         const headers = {
             authorization: `Bearer ${token}`,

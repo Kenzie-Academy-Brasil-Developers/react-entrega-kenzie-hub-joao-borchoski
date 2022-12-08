@@ -5,17 +5,19 @@ import { toast } from "react-toastify";
 import { Api } from "../Components/Services/Api";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { TechsContext } from "./TechsContext";
 
-export const AuthContext = createContext({});
+export const UserContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
-    const [stay, setStay] = useState(true);
-    const [loading, setLoading] = useState(false);
+export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const navigate = useNavigate();
-    const [modal, setModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [stay, setStay] = useState(true);
 
-    const [observer, setObserver] = useState(0);
+    const { observer, setObserver } = useContext(TechsContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function loadUser() {
@@ -77,21 +79,20 @@ export const AuthProvider = ({ children }) => {
     });
 
     return (
-        <AuthContext.Provider
+        <UserContext.Provider
             value={{
                 loading,
                 setLoading,
                 onSubmit,
                 formSchema,
                 user,
+                setUser,
                 stay,
-                modal,
-                setModal,
                 observer,
                 setObserver,
             }}
         >
             {children}
-        </AuthContext.Provider>
+        </UserContext.Provider>
     );
 };

@@ -11,17 +11,22 @@ import { IoIosAdd } from "react-icons/io";
 
 import { Navigate, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../Contexts/AuthConxtext";
-import { Techs, AddTech } from "./techs.jsx";
 
+import { UserContext } from "../../Contexts/UserConxtext";
+
+import { TechsContext } from "../../Contexts/TechsContext";
+import { Techs, AddTech } from "./techs.jsx";
+import { UpdateTech } from "../../Components/UpdateTech";
 
 export const DashBoard = () => {
+
     const navigate = useNavigate();
-    const { user, stay, modal, setModal } = useContext(AuthContext);
+    const { user, setUser, stay } = useContext(UserContext);
+    const { modal, setModal, updateModal } = useContext(TechsContext);
 
     function logout() {
         localStorage.removeItem("@kenziehub:token");
-        navigate("/");
+        setUser(null)
     }
 
     if (stay) {
@@ -41,13 +46,14 @@ export const DashBoard = () => {
             <StyledDiv2Dashbord>
                 <span>
                     <p>Tecnologias</p>
-                    <button onClick={()=> setModal(true)}>
+                    <button onClick={() => setModal(true)}>
                         <IoIosAdd size={35} />
                     </button>
                 </span>
                 <Techs />
             </StyledDiv2Dashbord>
-            {modal ? <AddTech/> : null}
+            {modal ? <AddTech /> : null}
+            {updateModal ? <UpdateTech /> : null}
         </StyledContainerDashboard>
     ) : (
         <Navigate to="/" />

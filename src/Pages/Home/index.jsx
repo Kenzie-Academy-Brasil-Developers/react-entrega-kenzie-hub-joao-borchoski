@@ -5,15 +5,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { StyledContainerHome, StyledDivFormHome } from "./style";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 
 import { useContext } from "react";
-import { AuthContext } from "../../Contexts/AuthConxtext";
+import { UserContext } from "../../Contexts/UserConxtext";
 
 export const HomePage = () => {
-    const { loading, onSubmit, formSchema } = useContext(AuthContext);
+    const { loading, onSubmit, formSchema, stay, user } = useContext(UserContext);
+
+    const navigate = useNavigate()
 
     const {
         register,
@@ -23,7 +25,9 @@ export const HomePage = () => {
         resolver: yupResolver(formSchema),
     });
 
-    
+    if(user){
+        setTimeout(()=>navigate('/Dashboard'), 0.5)
+    }
 
     return (
         <StyledContainerHome>
